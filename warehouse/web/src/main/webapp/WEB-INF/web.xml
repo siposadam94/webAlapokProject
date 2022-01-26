@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <web-app version="2.4">
+<!--    <servlet>-->
+<!--        <servlet-name>loginHandler</servlet-name>-->
+<!--        <servlet-class>hu.siposadam.servlet.LoginServlet</servlet-class>-->
+<!--    </servlet>-->
+
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>loginHandler</servlet-name>-->
+<!--        <url-pattern>/loginHandler</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    <filter>-->
+<!--        <filter-name>SecurityFilter</filter-name>-->
+<!--        <filter-class>hu.siposadam.filter.SecurityFilter</filter-class>-->
+<!--    </filter>-->
+
+<!--    <filter-mapping>-->
+<!--        <filter-name>SecurityFilter</filter-name>-->
+<!--        <url-pattern>/secured/*</url-pattern>-->
+<!--    </filter-mapping>-->
+
 </web-app>
