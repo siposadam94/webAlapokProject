@@ -26,17 +26,21 @@
 <body>
   
   <div class="container-fluid">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <span class="fs-4">Warehouse</span>
-      </a>
-
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link">Product</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Order</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Profile</a></li>
-      </ul>
-    </header>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <div class="navbar-collapse collapse">
+        <a class="navbar-brand me-auto text-dark" href="#"><strong>Warehouse</strong></a>  
+      </div>
+      <button class="navbar-toggler me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a href="#" class="nav-link text-dark"><strong>Product</strong></a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-dark"><strong>Order</strong></a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-dark"><strong>Profile</strong></a></li>
+          </ul>
+      </div>
+  </nav>
   </div>
 
 <div class="container-md">
