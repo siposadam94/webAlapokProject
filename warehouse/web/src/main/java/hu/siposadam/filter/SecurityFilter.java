@@ -2,30 +2,28 @@ package hu.siposadam.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
+import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter(filterName = "SecurityFilter", urlPatterns = "/secured/*")
-public class SecurityFilter implements Filter {
+public class SecurityFilter extends HttpFilter {
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-        HttpSession session = httpRequest.getSession();
+    //ctrl+alt+c -vel
+    public static final String AUTHENTICATED = "authenticated";
 
-        if (session.getAttribute("authenticated") != null) {
-            Boolean authenticated = (Boolean) session.getAttribute("authenticated");
+    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
-            if (authenticated) {
-                chain.doFilter(request, response);
-            } else {
-                httpResponse.sendRedirect("../login.html");
-            }
-        } else {
-            httpResponse.sendRedirect("../login.html");
+        //TODO Boolean.TRUE.equals() inkább
+        if (Boolean.TRUE.equals(session.getAttribute(AUTHENTICATED))) {
+            chain.doFilter(request, response);
         }
+
+        response.sendRedirect("../login.html");
+        return;
 
     }
 }
