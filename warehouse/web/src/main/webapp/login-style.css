@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: rgb(23, 111, 152)
+}
+
+h1 {
+    color: grey;
+}
+
+.loginHandler {
+    max-width: 500px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px;
+    border: 15px solid rgb(21, 102, 140);
+}
+
+.main-icon {
+    font-size: 30px;
+    color: rgb(42, 171, 231);
+}
+
+.input-group-text {
+    border-right: 1px white;
+}
+
+.btn {
+    background-image: linear-gradient(rgb(35, 163, 214), rgb(75, 152, 204));
+    border-radius: 5px;
+}
+
+.btn:hover {
+    box-shadow: 2px 2px rgb(36, 117, 209);
+}
+
+.forgot-password {
+    font-size: 10px;
+    color: grey;
+}
+
+.small-icon {
+    color: grey;
+}
+
+#loginMsg {
+    color: red;
+    font-style: italic;
+}
