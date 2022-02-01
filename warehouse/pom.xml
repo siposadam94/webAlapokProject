@@ -14,6 +14,7 @@
 
     <modules>
         <module>web</module>
+        <module>warehouse-client-api</module>
     </modules>
 
 <!--    TODO siposa dependecyManagement-->

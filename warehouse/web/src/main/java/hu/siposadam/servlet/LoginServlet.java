@@ -1,9 +1,13 @@
 package hu.siposadam.servlet;
 
+import entity.Product;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/loginHandler")
 public class LoginServlet extends HttpServlet {
@@ -13,12 +17,30 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if ("admin".equals(name) && "password".equals(password)) {
-            request.getSession().setAttribute("authenticated", Boolean.TRUE);
+        HttpSession session = request.getSession();
 
-            response.sendRedirect("secured/profile.html");
+        if ("admin".equals(name) && "password".equals(password)) {
+
+            List<Product> products = new ArrayList<>();
+            products.add(
+                    new Product("Playstation", "console", "passz", "box",
+                            200.99, 289.99, "nextgen console")
+            );
+            products.add(
+                    new Product("Xbox", "console", "passz", "box",
+                            189.99, 259.99, "nextgen console")
+            );
+
+            session.setAttribute("authenticated", Boolean.TRUE);
+            session.setAttribute("products", products);
+
+            response.sendRedirect("secured/products.jsp");
+            //response.sendRedirect("secured/profile.html");
             return;
         }
-        response.sendRedirect("login.html");
+
+        request.setAttribute("loginError", Boolean.FALSE);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+        requestDispatcher.forward(request, response);
     }
 }

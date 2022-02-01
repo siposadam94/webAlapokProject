@@ -18,8 +18,8 @@ public class SecurityFilter extends HttpFilter {
 
         if (Boolean.TRUE.equals(session.getAttribute(AUTHENTICATED))) {
             chain.doFilter(request, response);
+            return;
         }
         response.sendRedirect("../login.html");
-        return;
     }
 }
