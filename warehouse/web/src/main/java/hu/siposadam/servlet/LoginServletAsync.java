@@ -29,12 +29,12 @@ public class LoginServletAsync extends HttpServlet {
 
         if ("admin".equals(name) && "password".equals(password)) {
             loginInfo = gson.toJson(new LoginInfo(Boolean.TRUE));
-            out.print(gson.toJson(loginInfo));
+            out.print(loginInfo);
             out.flush();
             return;
         }
 
-        out.print(gson.toJson(loginInfo));
+        out.print(loginInfo);
         out.flush();
     }
 }

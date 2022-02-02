@@ -7,9 +7,7 @@ $("#login-async").click(function () {
             password: $("#password").val()
         }
     })
-        .done(function (msg) {
-            const loginInfo = JSON.parse(msg);
-
+        .done(function (loginInfo) {
             if (loginInfo["result"]) {
                 // https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage
                 window.location.replace("secured/profile.html");
