@@ -10,13 +10,30 @@
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
               crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        <style>
+            .modal-bg {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.4);
+                display: flex;
+                align-items: center;
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s, opacity 0.2s;
+            }
+            .modal-body {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
     </head>
     <body>
-        <div class="modal fade" id="loadingDiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="spinner-border text-primary" style="width: 50px; height: 50px;" role="status">
-                </div>
+        <div class="modal-bg">
+            <div class="modal-body">
+                <div class="spinner-border text-primary" style="width: 80px; height: 80px;" role="status"></div>
             </div>
         </div>
 
@@ -33,11 +50,11 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Category</th>
-                        <th scope="col">Description</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Unit</th>
                         <th scope="col">Purchase Price $</th>
                         <th scope="col">Selling Price $</th>
+                        <th scope="col">Description</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,11 +62,11 @@
                         <tr>
                             <td><c:out value="${name.name}"/></td>
                             <td><c:out value="${name.category}"/></td>
-                            <td><c:out value="${name.description}"/></td>
                             <td><c:out value="${name.quantity}"/></td>
                             <td><c:out value="${name.unit}"/></td>
                             <td><c:out value="${name.purchasePrice}"/></td>
                             <td><c:out value="${name.sellingPrice}"/></td>
+                            <td><c:out value="${name.description}"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -66,28 +83,28 @@
         </script>
         <script>
             $("#btn-fetchProducts").click(function () {
+                $(".modal-bg").css({"visibility": "visible", "opacity": 1});
+
                 $.ajax({
                     method: "get",
                     url: "../api/ProductService/getProducts",
                 })
                     .done(function (products) {
-                        $('#loadingDiv').modal("show");
                         setTimeout(function () {
                             $("#productTable").find("tr:gt(0)").remove();
 
                             products.forEach((product) => {
-                                $('#productTable > tbody:last-child').append(
-                                    '<tr>' +
-                                    '<td>' + product["name"] + '</td>' +
-                                    '<td>' + product["category"] + '</td>' +
-                                    '<td>' + product["description"] + '</td>' +
-                                    '<td>' + product["quantity"] + '</td>' +
-                                    '<td>' + product["unit"] + '</td>' +
-                                    '<td>' + product["purchasePrice"] + '</td>' +
-                                    '<td>' + product["sellingPrice"] + '</td>' +
-                                    '</tr>')
+                                const myRow = document.createElement("tr");
+
+                                Object.entries(product)
+                                    .forEach(([key]) => {
+                                        const myCol = document.createElement("td");
+                                        myCol.innerText = product[key];
+                                        myRow.appendChild(myCol);
+                                    });
+                                $("#productTable > tbody").append(myRow);
                             });
-                            $('#loadingDiv').modal("hide");
+                            $(".modal-bg").css({"visibility": "hidden", "opacity": 0});
                         }, 1000);
                     });
             });
