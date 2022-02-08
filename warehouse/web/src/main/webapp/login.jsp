@@ -47,7 +47,8 @@
                                aria-describedby="basic-addon1" name="password">
                     </div>
                     <p id="loginMsg">
-                        <c:if test="${requestScope.loginError == false }">
+                        <%--el lel próbáljam ki--%>
+                        <c:if test="${not requestScope.loginError}">
                             <c:out value="Érvénytelen belépési adatok!"/>
                         </c:if>
                     </p>

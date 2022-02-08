@@ -10,9 +10,7 @@ $("#login-async").click(function () {
         .done(function (loginInfo) {
 
             if (loginInfo["result"]) {
-                // https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage
                 window.location.replace("secured/profile.html");
-                //window.location.href = "secured/profile.html";
                 return;
             }
             $("#loginMsg").text("Érvénytelen belépési adatok!");

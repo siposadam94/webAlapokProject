@@ -58,15 +58,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${sessionScope.products}" var="name">
+                    <c:forEach items="${sessionScope.products}" var="product">
                         <tr>
-                            <td><c:out value="${name.name}"/></td>
-                            <td><c:out value="${name.category}"/></td>
-                            <td><c:out value="${name.quantity}"/></td>
-                            <td><c:out value="${name.unit}"/></td>
-                            <td><c:out value="${name.purchasePrice}"/></td>
-                            <td><c:out value="${name.sellingPrice}"/></td>
-                            <td><c:out value="${name.description}"/></td>
+                            <td><c:out value="${product.name}"/></td>
+                            <td><c:out value="${product.category}"/></td>
+                            <td><c:out value="${product.quantity}"/></td>
+                            <td><c:out value="${product.unit}"/></td>
+                            <td><c:out value="${product.purchasePrice}"/></td>
+                            <td><c:out value="${product.sellingPrice}"/></td>
+                            <td><c:out value="${product.description}"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>

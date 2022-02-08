@@ -17,8 +17,6 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("username");
         String password = request.getParameter("password");
 
-        HttpSession session = request.getSession();
-
         if ("admin".equals(name) && "password".equals(password)) {
 
             List<Product> products = new ArrayList<>();
@@ -31,6 +29,7 @@ public class LoginServlet extends HttpServlet {
                             189.99, 259.99, "nextgen console")
             );
 
+            HttpSession session = request.getSession();
             session.setAttribute("authenticated", Boolean.TRUE);
             session.setAttribute("products", products);
 

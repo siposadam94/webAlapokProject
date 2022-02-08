@@ -19,19 +19,18 @@ public class LoginServletAsync extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
-        //Gson gson = new Gson();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        String loginInfo = gson.toJson(new LoginInfo(Boolean.FALSE));
-
+        String loginInfo;
         String name = request.getParameter("username");
         String password = request.getParameter("password");
 
         if ("admin".equals(name) && "password".equals(password)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("authenticated", Boolean.TRUE);
             loginInfo = gson.toJson(new LoginInfo(Boolean.TRUE));
-            out.print(loginInfo);
-            out.flush();
-            return;
+        } else {
+            loginInfo = gson.toJson(new LoginInfo(Boolean.FALSE));
         }
 
         out.print(loginInfo);

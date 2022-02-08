@@ -1,20 +1,21 @@
 package entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Product {
+
     private String name;
     private String category;
+    //TODO lehet szám
     private String quantity;
     private String unit;
-    private Double purchasePrice;
-    private Double sellingPrice;
+    private BigDecimal purchasePrice;
+    private BigDecimal sellingPrice;
     private String description;
+
 }

@@ -8,21 +8,20 @@
     <version>0.1</version>
     <packaging>pom</packaging>
 
-    <properties>
-        <servlet-api.version>4.0.1</servlet-api.version>
-    </properties>
-
     <modules>
         <module>web</module>
         <module>warehouse-client-api</module>
     </modules>
-
-<!--    TODO siposa dependecyManagement-->
+    
     <dependencyManagement>
         <dependencies>
 
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+
+    </dependencies>
 
     <build>
         <plugins>
