@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +23,11 @@ public class LoginServlet extends HttpServlet {
             List<Product> products = new ArrayList<>();
             products.add(
                     new Product("Playstation", "console", "passz", "box",
-                            200.99, 289.99, "nextgen console")
+                            new BigDecimal("200.99"), new BigDecimal("280.99"), "nextgen console")
             );
             products.add(
                     new Product("Xbox", "console", "passz", "box",
-                            189.99, 259.99, "nextgen console")
+                            new BigDecimal("250.99"), new BigDecimal("290.99"), "nextgen console")
             );
 
             HttpSession session = request.getSession();
