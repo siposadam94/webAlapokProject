@@ -1,10 +1,14 @@
 package hu.siposadam.servlet;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginInfo {
 
-    private final Boolean result;
+    private Boolean result;
 
-    public LoginInfo(Boolean result) {
-        this.result = result;
-    }
 }
