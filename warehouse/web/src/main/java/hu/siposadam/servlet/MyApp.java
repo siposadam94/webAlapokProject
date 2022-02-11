@@ -1,6 +1,8 @@
 package hu.siposadam.servlet;
 
+import hu.siposadam.api.CategoryService;
 import hu.siposadam.api.ProductService;
+import hu.siposadam.api.UnitService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +17,8 @@ public class MyApp extends Application {
     public Set<Object> getSingletons() {
         Set<Object> set = new HashSet<>();
         set.add(new ProductService());
+        set.add(new CategoryService());
+        set.add(new UnitService());
         return set;
     }
 

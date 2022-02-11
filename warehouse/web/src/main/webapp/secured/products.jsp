@@ -24,6 +24,7 @@
                 opacity: 0;
                 transition: visibility 0s, opacity 0.2s;
             }
+
             .modal-body {
                 display: flex;
                 justify-content: center;
@@ -38,13 +39,38 @@
         </div>
 
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row" style="height: 100px;">
+                <h1 class="text-center">Products</h1>
+            </div>
+
+            <div class="row align-items-center justify-content-around" style="height: 100px;">
                 <div class="col-4">
-                    <h1>Products</h1>
-                    <button type="button" class="btn btn-success" id="btn-fetchProducts">Frissités</button>
+                    <div class="col input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupCategory">Category</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupCategory" style="width: 50%;">
+                            <option selected>All</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupUnit">Unit</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupUnit" style="width: 50%;">
+                            <option selected>All</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <br/>
+            <div class="row justify-content-start">
+                <div class="col-4">
+                    <button type="button" class="btn btn-success" id="btn-fetchProducts">Frissités</button>
+                </div>
+            </div>
             <table class="table" id="productTable">
                 <thead class="thead-dark">
                     <tr>
@@ -108,6 +134,39 @@
                         }, 1000);
                     });
             });
+
+            $(window).on('load', function () {
+
+                let categorySelect = $("#inputGroupCategory");
+                let inputGroupUnit = $("#inputGroupUnit");
+                $.ajax({
+                    method: "get",
+                    url: "../api/CategoryService/getCategories",
+                })
+                    .done(function (categories) {
+                        categories.forEach((category) => {
+                            console.log(category);
+                            let opt = document.createElement('option');
+                            opt.value = category[0];
+                            opt.innerHTML = category[1];
+                            categorySelect.append(opt);
+                        });
+                    });
+                $.ajax({
+                    method: "get",
+                    url: "../api/UnitService/getUnits",
+                })
+                    .done(function (units) {
+                        units.forEach((unit) => {
+                            console.log(unit);
+                            let opt = document.createElement('option');
+                            opt.value = unit[0];
+                            opt.innerHTML = unit[1];
+                            inputGroupUnit.append(opt);
+                        });
+                    });
+            });
+
         </script>
     </body>
 </html>

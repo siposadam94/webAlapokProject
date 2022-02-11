@@ -14,7 +14,7 @@ public class MyContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         Connection connection = JDBCConnector.createConnection();
         ScriptRunner sr = new ScriptRunner(connection);
-        try (Reader reader = new BufferedReader(new FileReader("c:\\Users\\Adam\\Desktop\\init.sql"))) {
+        try (Reader reader = new BufferedReader(new FileReader("c:\\Users\\Adam\\Desktop\\init_improved.sql"))) {
             sr.runScript(reader);
         } catch (IOException e) {
             e.printStackTrace();
