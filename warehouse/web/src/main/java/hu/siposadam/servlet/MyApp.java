@@ -21,5 +21,12 @@ public class MyApp extends Application {
         set.add(new UnitService());
         return set;
     }
-
 }
+
+//JERSEY
+//@ApplicationPath("/api")
+//public class MyApp extends ResourceConfig {
+//    public MyApp() {
+//        packages("hu.siposadam.api.CategoryService");
+//    }
+//}

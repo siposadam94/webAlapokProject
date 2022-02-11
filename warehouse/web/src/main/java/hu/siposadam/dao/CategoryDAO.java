@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CategoryDAO {
 
-    private final EntityManagerFactory entityManagerFactory;
+    EntityManagerFactory entityManagerFactory;
 
     public CategoryDAO() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
@@ -16,8 +16,7 @@ public class CategoryDAO {
 
     public List<Category> getAll() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<Category> resultList = entityManager.createNativeQuery("select * from Category").getResultList();
 
-        return resultList;
+        return entityManager.createNativeQuery("select * from Category").getResultList();
     }
 }

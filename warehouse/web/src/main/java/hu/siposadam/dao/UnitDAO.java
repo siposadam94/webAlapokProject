@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UnitDAO {
 
-    private final EntityManagerFactory entityManagerFactory;
+    EntityManagerFactory entityManagerFactory;
 
     public UnitDAO() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
@@ -17,8 +17,7 @@ public class UnitDAO {
 
     public List<Unit> getAll() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<Unit> resultList = entityManager.createNativeQuery("select * from Unit").getResultList();
 
-        return resultList;
+        return entityManager.createNativeQuery("select * from Unit").getResultList();
     }
 }

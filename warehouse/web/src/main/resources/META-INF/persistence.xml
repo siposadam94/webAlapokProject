@@ -6,9 +6,9 @@
     <persistence-unit name="persistence">
         <description>Hibernate Entity Manager Example</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <!--        <class>hu.siposadam.entity.Product</class>-->
-        <!--        <class>hu.siposadam.entity.Unit</class>-->
-        <!--        <class>hu.siposadam.entity.Category</class>-->
+                <class>hu.siposadam.entity.Product</class>
+                <class>hu.siposadam.entity.Unit</class>
+                <class>hu.siposadam.entity.Category</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:product"/>
@@ -16,7 +16,7 @@
             <property name="jakarta.persistence.jdbc.password" value="sa"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="show_sql" value="true"/>
-<!--            <property name="hibernate.hbm2ddl.auto" value="create"/>-->
+<!--            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>-->
 <!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />-->
 
         </properties>

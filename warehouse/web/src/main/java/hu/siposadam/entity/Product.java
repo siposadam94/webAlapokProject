@@ -18,19 +18,24 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_generator")
     @SequenceGenerator(name="product_generator", sequenceName = "prod_seq")
     private Integer id;
+
     private String name;
-    @OneToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+
+    @ManyToOne()
     private Category category;
+
     //TODO lehet szám
     private String quantity;
-    @OneToOne
-    @JoinColumn(name = "unit_id", referencedColumnName = "id")
+
+    @ManyToOne()
     private Unit unit;
+
     @Column(name = "purchase_price")
     private BigDecimal purchasePrice;
+
     @Column(name = "selling_price")
     private BigDecimal sellingPrice;
+
     private String description;
 
 }

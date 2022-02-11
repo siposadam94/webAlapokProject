@@ -7,40 +7,27 @@ import java.util.List;
 
 public class ProductDAO {
 
-    private final EntityManagerFactory entityManagerFactory;
+    EntityManagerFactory entityManagerFactory;
 
     public ProductDAO() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        this.entityManagerFactory =
+                Persistence.createEntityManagerFactory("persistence");
     }
 
     public List<Product> getAll(int category, int unit, int page) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         int pageSize = 2;
-        Query nativeQuery = entityManager.createNativeQuery(
-                "SELECT product.name, category.name, quantity, unit.name, purchase_price, selling_price, description " +
-                        "FROM product " +
-                        "LEFT JOIN category ON (product.category_id = category.id) " +
-                        "LEFT JOIN unit ON (product.unit_id = unit.id) "
-        );
 
+        Query nativeQuery = entityManager.createQuery(
+                "SELECT p.name, p.category.name, p.quantity, p.unit.name, " +
+                        "p.purchasePrice, p.sellingPrice, p.description " +
+                        "FROM Product p");
 
         return nativeQuery
-                .setFirstResult((page-1) * pageSize)
+                .setFirstResult((page - 1) * pageSize)
                 .setMaxResults(pageSize)
                 .getResultList();
     }
-
-//    public List<Product> getAllJPQL(String category, String unit, int page) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        int pageSize = 2;
-//        Query nativeQuery = entityManager.createQuery(
-//                "SELECT p FROM Product p left join Category c left join Unit u"
-//        );
-//        return nativeQuery
-//                .setFirstResult((page-1) * pageSize)
-//                .setMaxResults(pageSize)
-//                .getResultList();
-//    }
 
     public void addProduct() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();

@@ -10,15 +10,14 @@ import java.util.List;
 @Path("/CategoryService")
 public class CategoryService {
 
-    CategoryDAO categoryDAO = new CategoryDAO();
+    private final CategoryDAO categoryDAO = new CategoryDAO();
 
     @GET
     @Path("/getCategories")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Category> getProducts(
-    ) {
+    public List<Category> getProducts() {
         return categoryDAO.getAll();
-
     }
+
 }
 

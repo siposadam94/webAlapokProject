@@ -14,15 +14,13 @@ import java.util.List;
 @Path("/UnitService")
 public class UnitService {
 
-    UnitDAO unitDAO = new UnitDAO();
+    private final UnitDAO unitDAO = new UnitDAO();
 
     @GET
     @Path("/getUnits")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Unit> getUnits(
-    ) {
+    public List<Unit> getUnits() {
         return unitDAO.getAll();
-
     }
 }
 
