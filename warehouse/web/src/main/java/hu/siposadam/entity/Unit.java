@@ -1,11 +1,9 @@
 package hu.siposadam.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,15 +13,10 @@ import java.util.List;
 public class Unit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "unit_generator")
-    @SequenceGenerator(name="unit_generator", sequenceName = "unit_seq")
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "unit_generator")
+//    @SequenceGenerator(name = "unit_generator", sequenceName = "unit_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
-
-    @OneToMany(
-            mappedBy = "unit",
-            cascade = CascadeType.ALL
-    )
-    private List<Product> products;
 }

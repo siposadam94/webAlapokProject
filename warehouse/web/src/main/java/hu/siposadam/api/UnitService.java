@@ -1,8 +1,6 @@
 package hu.siposadam.api;
 
-import hu.siposadam.dao.CategoryDAO;
 import hu.siposadam.dao.UnitDAO;
-import hu.siposadam.entity.Category;
 import hu.siposadam.entity.Unit;
 
 import javax.ws.rs.GET;

@@ -2,7 +2,7 @@ package hu.siposadam.dao;
 
 import hu.siposadam.entity.Category;
 import hu.siposadam.entity.Product;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.List;
 

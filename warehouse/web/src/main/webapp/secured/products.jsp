@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
         <style>
             .modal-bg {
+                z-index: 1;
                 position: fixed;
                 width: 100%;
                 height: 100%;
@@ -50,7 +51,7 @@
                             <label class="input-group-text" for="inputGroupCategory">Category</label>
                         </div>
                         <select class="custom-select" id="inputGroupCategory" style="width: 50%;">
-                            <option selected>All</option>
+                            <option value="0" selected>All</option>
                         </select>
                     </div>
                 </div>
@@ -60,7 +61,7 @@
                             <label class="input-group-text" for="inputGroupUnit">Unit</label>
                         </div>
                         <select class="custom-select" id="inputGroupUnit" style="width: 50%;">
-                            <option selected>All</option>
+                            <option value="0" selected>All</option>
                         </select>
                     </div>
                 </div>
@@ -97,6 +98,21 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <button class="page-link" id="firstBtn">1</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link" id="secondBtn">2</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link" id="thirdBtn">3</button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -110,10 +126,12 @@
         <script>
             $("#btn-fetchProducts").click(function () {
                 $(".modal-bg").css({"visibility": "visible", "opacity": 1});
+                let categoryV = $("#inputGroupCategory").val();
+                let unitV = $("#inputGroupUnit").val();
 
                 $.ajax({
                     method: "get",
-                    url: "../api/ProductService/getProducts",
+                    url: "../api/ProductService/getProducts" + "?category=" + categoryV + "&unit=" + unitV,
                 })
                     .done(function (products) {
                         setTimeout(function () {
@@ -145,7 +163,6 @@
                 })
                     .done(function (categories) {
                         categories.forEach((category) => {
-                            console.log(category);
                             let opt = document.createElement('option');
                             opt.value = category[0];
                             opt.innerHTML = category[1];
@@ -158,12 +175,53 @@
                 })
                     .done(function (units) {
                         units.forEach((unit) => {
-                            console.log(unit);
                             let opt = document.createElement('option');
                             opt.value = unit[0];
                             opt.innerHTML = unit[1];
                             inputGroupUnit.append(opt);
                         });
+                    });
+            });
+
+            $(".page-link").click(function () {
+                $(".modal-bg").css({"visibility": "visible", "opacity": 1});
+                let page = +this.innerText;
+                let whichButton = this.id;
+                let categoryV = $("#inputGroupCategory").val();
+                let unitV = $("#inputGroupUnit").val();
+
+                $.ajax({
+                    method: "get",
+                    url: "../api/ProductService/getProducts" + "?category=" + categoryV + "&unit=" + unitV + "&page=" + page,
+                })
+                    .done(function (products) {
+                        setTimeout(function () {
+                            $("#productTable").find("tr:gt(0)").remove();
+
+                            products.forEach((product) => {
+                                const myRow = document.createElement("tr");
+
+                                Object.entries(product)
+                                    .forEach(([key]) => {
+                                        const myCol = document.createElement("td");
+                                        myCol.innerText = product[key];
+                                        myRow.appendChild(myCol);
+                                    });
+                                $("#productTable > tbody").append(myRow);
+                            });
+                            $(".modal-bg").css({"visibility": "hidden", "opacity": 0});
+
+                            if (whichButton === "firstBtn" && page > 1) {
+                                $("#firstBtn").text(page - 1);
+                                $("#secondBtn").text(page);
+                                $("#thirdBtn").text(page + 1);
+                            } else if (whichButton === "thirdBtn") {
+
+                                $("#firstBtn").text(page - 1);
+                                $("#secondBtn").text(page);
+                                $("#thirdBtn").text(page + 1);
+                            }
+                        }, 1000);
                     });
             });
 

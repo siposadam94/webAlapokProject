@@ -1,9 +1,9 @@
 package hu.siposadam.dao;
 
 import hu.siposadam.entity.Unit;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import java.util.List;
 

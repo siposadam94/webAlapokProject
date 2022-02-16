@@ -25,8 +25,11 @@ public class ProductService {
 
     @PUT
     @Path("/addProduct")
-    public void addProduct() {
-        productDAO.addProduct();
+    @Consumes()
+    @Produces(MediaType.APPLICATION_JSON)
+    public void addProduct(Product product) {
+         productDAO.addProduct(product);
     }
+
 }
 
