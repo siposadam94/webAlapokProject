@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("authenticated", Boolean.TRUE);
             session.setAttribute("products", products);
 
-            response.sendRedirect("secured/products.jsp");
+            response.sendRedirect("secured/products.xhtml");
             //response.sendRedirect("secured/profile.html");
             return;
         }
