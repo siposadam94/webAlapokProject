@@ -44,7 +44,7 @@
                 <h1 class="text-center">Products</h1>
             </div>
 
-            <div class="row align-items-center justify-content-around" style="height: 100px;">
+            <div class="row justify-content-around" style="height: 100px;">
                 <div class="col-4">
                     <div class="col input-group">
                         <div class="input-group-prepend">
@@ -55,6 +55,7 @@
                         </select>
                     </div>
                 </div>
+
                 <div class="col-4">
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -64,6 +65,13 @@
                             <option value="0" selected>All</option>
                         </select>
                     </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="searchName">
+                    </div>
+                    <button class="btn btn-success" id="searchBtn" type="button">Search</button>
                 </div>
             </div>
             <br/>
@@ -135,26 +143,12 @@
                 })
                     .done(function (products) {
                         setTimeout(function () {
-                            $("#productTable").find("tr:gt(0)").remove();
-
-                            products.forEach((product) => {
-                                const myRow = document.createElement("tr");
-
-                                Object.entries(product)
-                                    .forEach(([key]) => {
-                                        const myCol = document.createElement("td");
-                                        myCol.innerText = product[key];
-                                        myRow.appendChild(myCol);
-                                    });
-                                $("#productTable > tbody").append(myRow);
-                            });
-                            $(".modal-bg").css({"visibility": "hidden", "opacity": 0});
+                            buildTable(products);
                         }, 1000);
                     });
             });
 
             $(window).on('load', function () {
-
                 let categorySelect = $("#inputGroupCategory");
                 let inputGroupUnit = $("#inputGroupUnit");
                 $.ajax({
@@ -186,7 +180,7 @@
             $(".page-link").click(function () {
                 $(".modal-bg").css({"visibility": "visible", "opacity": 1});
                 let page = +this.innerText;
-                let whichButton = this.id;
+                let clickedButton = this.id;
                 let categoryV = $("#inputGroupCategory").val();
                 let unitV = $("#inputGroupUnit").val();
 
@@ -196,26 +190,13 @@
                 })
                     .done(function (products) {
                         setTimeout(function () {
-                            $("#productTable").find("tr:gt(0)").remove();
+                            buildTable(products);
 
-                            products.forEach((product) => {
-                                const myRow = document.createElement("tr");
-
-                                Object.entries(product)
-                                    .forEach(([key]) => {
-                                        const myCol = document.createElement("td");
-                                        myCol.innerText = product[key];
-                                        myRow.appendChild(myCol);
-                                    });
-                                $("#productTable > tbody").append(myRow);
-                            });
-                            $(".modal-bg").css({"visibility": "hidden", "opacity": 0});
-
-                            if (whichButton === "firstBtn" && page > 1) {
+                            if (clickedButton === "firstBtn" && page > 1) {
                                 $("#firstBtn").text(page - 1);
                                 $("#secondBtn").text(page);
                                 $("#thirdBtn").text(page + 1);
-                            } else if (whichButton === "thirdBtn") {
+                            } else if (clickedButton === "thirdBtn") {
 
                                 $("#firstBtn").text(page - 1);
                                 $("#secondBtn").text(page);
@@ -225,6 +206,35 @@
                     });
             });
 
+            $("#searchBtn").click(function () {
+                $(".modal-bg").css({"visibility": "visible", "opacity": 1});
+                let name = $("#searchName").val();
+
+                $.ajax({
+                    method: "get",
+                    url: "../api/ProductService/getProductByName" + "?name=" + name
+                })
+                    .done(function (products) {
+                        setTimeout(function () {
+                            buildTable(products);
+                        }, 1000);
+                    });
+            });
+
+            function buildTable(products) {
+                $("#productTable").find("tr:gt(0)").remove();
+
+                products.forEach((product) => {
+                    const myRow = document.createElement("tr");
+                    Object.entries(product).forEach(([key]) => {
+                        const myCol = document.createElement("td");
+                        myCol.innerText = product[key];
+                        myRow.appendChild(myCol);
+                    });
+                    $("#productTable > tbody").append(myRow);
+                });
+                $(".modal-bg").css({"visibility": "hidden", "opacity": 0});
+            }
         </script>
     </body>
 </html>

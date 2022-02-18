@@ -3,6 +3,7 @@ package hu.siposadam.dao;
 import hu.siposadam.entity.Category;
 import hu.siposadam.entity.Product;
 import hu.siposadam.entity.Unit;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.ConstraintViolation;
@@ -14,6 +15,7 @@ import java.util.Set;
 public class ProductDAO {
 
     EntityManagerFactory entityManagerFactory;
+    static int pageSize = 4;
 
     public ProductDAO() {
         this.entityManagerFactory =
@@ -22,7 +24,6 @@ public class ProductDAO {
 
     public List<Product> getAll(int category, int unit, int page) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        int pageSize = 4;
 
 //        https://www.baeldung.com/spring-data-jpa-null-parameters
 
@@ -50,6 +51,26 @@ public class ProductDAO {
 
         } else {
             query = entityManager.createQuery(select);
+        }
+
+        return query
+                .setFirstResult((page - 1) * pageSize)
+                .setMaxResults(pageSize)
+                .getResultList();
+    }
+
+    public List<Product> findByName(String name, int page) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        String queryString = "SELECT p.name, p.category.name, p.quantity, p.unit.name,p.purchasePrice, p.sellingPrice, p.description FROM Product p ";
+        Query query;
+
+        if (StringUtils.isNotEmpty(name)) {
+            queryString += "WHERE p.name LIKE :name";
+
+            query = entityManager.createQuery(queryString);
+            query.setParameter("name", "%" + name + "%");
+        } else {
+            query = entityManager.createQuery(queryString);
         }
 
         return query

@@ -31,5 +31,15 @@ public class ProductService {
          productDAO.addProduct(product);
     }
 
+    @GET
+    @Path("/getProductByName")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> getProductByName(
+            @QueryParam("name") String name,
+            @DefaultValue("1") @QueryParam("page") int page
+    ) {
+        return productDAO.findByName(name, page);
+    }
+
 }
 
