@@ -115,6 +115,17 @@
             <version>11.0.0</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>com.sun.faces</groupId>-->
+<!--            <artifactId>jsf-api</artifactId>-->
+<!--            <version>2.1.13</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.sun.faces</groupId>-->
+<!--            <artifactId>jsf-impl</artifactId>-->
+<!--            <version>2.1.13</version>-->
+<!--        </dependency>-->
+
         <!-- JSF API -->
         <dependency>
             <groupId>javax.faces</groupId>
@@ -128,17 +139,17 @@
             <version>2.3.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>2.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>javax.enterprise</groupId>-->
+<!--            <artifactId>cdi-api</artifactId>-->
+<!--            <version>2.0</version>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.jboss.weld.servlet</groupId>
-            <artifactId>weld-servlet-shaded</artifactId>
-            <version>3.1.6.Final</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.jboss.weld.servlet</groupId>-->
+<!--            <artifactId>weld-servlet-shaded</artifactId>-->
+<!--            <version>3.1.6.Final</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 </project>

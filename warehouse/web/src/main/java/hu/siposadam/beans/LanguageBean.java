@@ -1,7 +1,7 @@
 package hu.siposadam.beans;
 
-import javax.annotation.ManagedBean;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
-@ManagedBean
+@ManagedBean(name = "language")
 @SessionScoped
 public class LanguageBean implements Serializable {
 
@@ -25,20 +25,20 @@ public class LanguageBean implements Serializable {
         countries.put("Hungary", new Locale("hu", "HU"));
     }
 
-    public Map<String, Object> getCountriesInMap() {
+    public Map<String, Object> getCountries() {
         return countries;
     }
 
-    public String getLocaleCode() {
+    public String getLocale() {
         return localeCode;
     }
 
-    public void setLocaleCode(String localeCode) {
+    public void setLocale(String localeCode) {
         this.localeCode = localeCode;
     }
 
     //value change event listener
-    public void countryLocaleCodeChanged(ValueChangeEvent e) {
+    public void localeChanged(ValueChangeEvent e) {
 
         String newLocaleValue = e.getNewValue().toString();
 

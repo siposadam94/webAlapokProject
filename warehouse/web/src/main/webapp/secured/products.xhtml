@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
         <title>User Form</title>
     </h:head>
     <h:body>
-        <h:form>
+        <h:body>
+            <h2>Internalization Language Example</h2>
 
-            <h2>
-                <h:outputText value="#{msg['greeting']}"/>
-            </h2>
+            <h:form>
+                <h3><h:outputText value="#{msg['greeting']}"/></h3>
 
-            <h:panelGrid columns="2">
+                <h:panelGrid columns="2">
+                    Language :
+                    <h:selectOneMenu value="#{language.locale}" onchange="submit()"
+                                     valueChangeListener="#{language.localeChanged}">
+                        <f:selectItems value="#{language.countries}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
 
-                Language :
-                <h:selectOneMenu value="#{language.localeCode}" onchange="submit()"
-                                 valueChangeListener="#{language.countryLocaleCodeChanged}">
-                    <f:selectItems value="#{language.countriesInMap}"/>
-                </h:selectOneMenu>
-
-            </h:panelGrid>
-
-        </h:form>
+            </h:form>
+        </h:body>
     </h:body>
 </html>
