@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>User Form</title>
     </h:head>
@@ -15,13 +16,57 @@
 
                 <h:panelGrid columns="2">
                     Language :
-                    <h:selectOneMenu value="#{language.locale}" onchange="submit()"
-                                     valueChangeListener="#{language.localeChanged}">
-                        <f:selectItems value="#{language.countries}"/>
+                    <h:selectOneMenu value="#{languageBean.locale}" onchange="submit()"
+                                     valueChangeListener="#{languageBean.localeChanged}">
+                        <f:selectItems value="#{languageBean.countries}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
 
+                <h:outputLabel for="txt2" value="Text 2: *"/>
+                <p:selectOneMenu id="txt2" value="#{productBean.name}" required="true" label="Text 2" style="width: 12rem">
+                    <f:selectItem itemLabel="Choose..." itemValue="" noSelectionOption="true"/>
+                    <f:selectItems value="#{productBean.categories}"/>
+                </p:selectOneMenu>
+
+<!--                <div class="p-field p-col-12 p-md-4">-->
+<!--                    <p:outputLabel for="@next" value="Basic"/>-->
+<!--                    <p:selectOneMenu id="option">-->
+<!--                        <f:selectItems itemLabel="Select wat" itemValue=""/>-->
+<!--                        <f:facet name="footer">-->
+<!--                            <p:divider styleClass="p-mt-0" />-->
+<!--                            <h:outputText value="3 options" style="font-weight:bold;"/>-->
+<!--                        </f:facet>-->
+<!--                    </p:selectOneMenu>-->
+<!--                </div>-->
             </h:form>
+
+<!--            <p:dataTable value="#{productBean.products}" var="product"-->
+<!--                         style="width:100%">-->
+<!--                <p:column headerText="Name">-->
+<!--                    <h:outputText value="#{product.name}" />-->
+<!--                </p:column>-->
+<!--                <p:column headerText="Category">-->
+<!--                    <h:outputText value="#{product.category.name}" />-->
+<!--                </p:column>-->
+<!--                <p:column headerText="Unit">-->
+<!--                    <h:outputText value="#{product.unit}" />-->
+<!--                </p:column>-->
+<!--&lt;!&ndash;                <p:column headerText="Unit of Measure">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <h:outputText value="#{product.unitOfMeasure.name}" />&ndash;&gt;-->
+<!--&lt;!&ndash;                </p:column>&ndash;&gt;-->
+<!--                <p:column headerText="Selling Price">-->
+<!--                    <h:outputText value="#{product.sellingPrice}" />-->
+<!--                </p:column>-->
+<!--                <p:column headerText="Purchase Price">-->
+<!--                    <h:outputText value="#{product.purchasePrice}" />-->
+<!--                </p:column>-->
+<!--                <p:column headerText="Description">-->
+<!--                    <h:outputText value="#{product.description}" />-->
+<!--                </p:column>-->
+
+<!--            </p:dataTable>-->
+
+
         </h:body>
     </h:body>
 </html>

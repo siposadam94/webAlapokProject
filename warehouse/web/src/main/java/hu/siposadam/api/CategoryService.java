@@ -3,6 +3,8 @@ package hu.siposadam.api;
 import hu.siposadam.dao.CategoryDAO;
 import hu.siposadam.entity.Category;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;

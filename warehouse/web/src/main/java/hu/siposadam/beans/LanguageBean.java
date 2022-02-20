@@ -1,17 +1,16 @@
 package hu.siposadam.beans;
 
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.inject.Named;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
-@ManagedBean(name = "language")
+@Named
 @SessionScoped
 public class LanguageBean implements Serializable {
 
